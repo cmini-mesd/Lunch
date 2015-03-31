@@ -1,0 +1,3 @@
+voting:
+    path:     /
+    defaults: { _controller: "MesdLunchBundle:Voting:index" }

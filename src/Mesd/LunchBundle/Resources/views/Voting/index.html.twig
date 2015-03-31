@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+{% block title %} Restaurants {% endblock %}
+
+
+    {% block body -%}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-notice">
+        {{ flashMessage }}
+    </div>
+    {% endfor %}
+
+    <h1>Restaurant List</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Hours</th>
+                <th>Price</th>
+                <th>Style</th>
+                <th>Type</th>
+{#                 <th>Actions</th> #}
+                <th>No-Votes</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('restaurant_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.location }}</td>
+                <td>{{ entity.hours }}</td>
+                <td>{{ entity.price }}</td>
+                <td>{{ entity.style }}</td>
+                <td>{{ entity.type }}</td>
+                <td>{{ entity.votes }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('restaurant_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('restaurant_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('restaurant_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

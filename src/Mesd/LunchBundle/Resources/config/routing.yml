@@ -1,0 +1,11 @@
+mesd_lunch_restaurant:
+    resource: "@MesdLunchBundle/Resources/config/routing/restaurant.yml"
+    prefix:   /restaurant
+
+mesd_lunch_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MesdLunchBundle:Default:index }
+
+mesd_lunch_voting:
+    resource: "@MesdLunchBundle/Resources/config/routing/voting.yml"
+    prefix:   /voting

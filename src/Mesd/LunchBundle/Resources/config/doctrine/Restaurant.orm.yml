@@ -1,0 +1,35 @@
+Mesd\LunchBundle\Entity\Restaurant:
+    type: entity
+    table: null
+    repositoryClass: Mesd\LunchBundle\Entity\RestaurantRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        location:
+            type: string
+            length: 255
+        hours:
+            type: string
+            length: '10'
+        price:
+            type: string
+            length: '4'
+        style:
+            type: string
+            length: 255
+        type:
+            type: string
+            length: 255
+        # votes:
+        #     type: integer
+        #     length: 2
+        #     nullable: true
+
+    lifecycleCallbacks: {  }

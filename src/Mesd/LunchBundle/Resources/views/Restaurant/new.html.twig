@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Restaurant creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    {% include 'MesdLunchBundle:Restaurant:backtolist.html.twig' %}
+</ul>
+{% endblock %}

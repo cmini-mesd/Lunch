@@ -1,0 +1,4 @@
+services:
+#    mesd_lunch.example:
+#        class: Mesd\LunchBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
