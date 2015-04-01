@@ -1,0 +1,30 @@
+style:
+    path:     /
+    defaults: { _controller: "MesdLunchBundle:Style:index" }
+
+style_show:
+    path:     /{id}/show
+    defaults: { _controller: "MesdLunchBundle:Style:show" }
+
+style_new:
+    path:     /new
+    defaults: { _controller: "MesdLunchBundle:Style:new" }
+
+style_create:
+    path:     /create
+    defaults: { _controller: "MesdLunchBundle:Style:create" }
+    requirements: { _method: post }
+
+style_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MesdLunchBundle:Style:edit" }
+
+style_update:
+    path:     /{id}/update
+    defaults: { _controller: "MesdLunchBundle:Style:update" }
+    requirements: { _method: post|put }
+
+style_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MesdLunchBundle:Style:delete" }
+    requirements: { _method: post|delete }

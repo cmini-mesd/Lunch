@@ -37,16 +37,30 @@ class Restaurant
     /**
      * @var string
      */
-    private $style;
-
-    /**
-     * @var string
-     */
     private $type;
+
     /**
      * @var integer
      */
-    private $votes;
+    private $voteTotal;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $vote;
+
+    /**
+     * @var \Mesd\LunchBundle\Entity\Style
+     */
+    private $style;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->vote = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -152,29 +166,6 @@ class Restaurant
     }
 
     /**
-     * Set style
-     *
-     * @param string $style
-     * @return Restaurant
-     */
-    public function setStyle($style)
-    {
-        $this->style = $style;
-
-        return $this;
-    }
-
-    /**
-     * Get style
-     *
-     * @return string 
-     */
-    public function getStyle()
-    {
-        return $this->style;
-    }
-
-    /**
      * Set type
      *
      * @param string $type
@@ -199,26 +190,83 @@ class Restaurant
 
 
 
+
     /**
-     * Set votes
+     * Set voteTotal
      *
-     * @param integer $votes
+     * @param integer $voteTotal
      * @return Restaurant
      */
-    public function setVotes($votes)
+    public function setVoteTotal($voteTotal)
     {
-        $this->votes = $votes;
+        $this->voteTotal = $voteTotal;
 
         return $this;
     }
 
     /**
-     * Get votes
+     * Get voteTotal
      *
-     * @return integer 
+     * @return integer
      */
-    public function getVotes()
+    public function getVoteTotal()
     {
-        return $this->votes;
+        return $this->voteTotal;
+    }
+
+    /**
+     * Set style
+     *
+     * @param \Mesd\LunchBundle\Entity\Style $style
+     * @return Restaurant
+     */
+    public function setStyle(\Mesd\LunchBundle\Entity\Style $style = null)
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+
+    /**
+     * Get style
+     *
+     * @return \Mesd\LunchBundle\Entity\Style 
+     */
+    public function getStyle()
+    {
+        return $this->style;
+    }
+
+    /**
+     * Get vote
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getVote()
+    {
+        return $this->vote;
+    }
+
+    /**
+     * Add vote
+     *
+     * @param \Mesd\LunchBundle\Entity\Vote $vote
+     * @return Restaurant
+     */
+    public function addVote(\Mesd\LunchBundle\Entity\Vote $vote)
+    {
+        $this->vote[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote
+     *
+     * @param \Mesd\LunchBundle\Entity\Vote $vote
+     */
+    public function removeVote(\Mesd\LunchBundle\Entity\Vote $vote)
+    {
+        $this->vote->removeElement($vote);
     }
 }

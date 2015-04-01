@@ -1,0 +1,30 @@
+vote:
+    path:     /
+    defaults: { _controller: "MesdLunchBundle:Vote:index" }
+
+vote_show:
+    path:     /{id}/show
+    defaults: { _controller: "MesdLunchBundle:Vote:show" }
+
+vote_new:
+    path:     /new
+    defaults: { _controller: "MesdLunchBundle:Vote:new" }
+
+vote_create:
+    path:     /create
+    defaults: { _controller: "MesdLunchBundle:Vote:create" }
+    requirements: { _method: post }
+
+vote_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MesdLunchBundle:Vote:edit" }
+
+vote_update:
+    path:     /{id}/update
+    defaults: { _controller: "MesdLunchBundle:Vote:update" }
+    requirements: { _method: post|put }
+
+vote_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MesdLunchBundle:Vote:delete" }
+    requirements: { _method: post|delete }

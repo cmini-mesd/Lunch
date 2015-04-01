@@ -1,0 +1,45 @@
+Mesd\LunchBundle\Entity\Vote:
+    type: entity
+    table: null
+    repositoryClass: Mesd\LunchBundle\Entity\VoteRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        voter_id:
+            type: integer
+            length: 100
+        vote_date: 
+            type: date 
+
+        # name:
+        #     type: string
+        #     length: 255
+        # location:
+        #     type: string
+        #     length: 255
+        # hours:
+        #     type: string
+        #     length: '10'
+        # price:
+        #     type: string
+        #     length: '4'
+        # type:
+        #     type: string
+        #     length: 255
+        # votes:
+        #     type: integer
+        #     length: 2
+        #     nullable: true
+
+    manyToOne:
+        restaurant:
+            targetEntity: Restaurant
+            inversedBy: vote
+
+
+
+    lifecycleCallbacks: {  }

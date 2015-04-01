@@ -37,12 +37,17 @@ class Restaurant
     /**
      * @var string
      */
-    private $style;
+    private $type;
 
     /**
-     * @var string
+     * @var integer
      */
-    private $type;
+    private $votes;
+
+    /**
+     * @var \Mesd\LunchBundle\Entity\Style
+     */
+    private $style;
 
 
     /**
@@ -148,29 +153,6 @@ class Restaurant
     }
 
     /**
-     * Set style
-     *
-     * @param string $style
-     * @return Restaurant
-     */
-    public function setStyle($style)
-    {
-        $this->style = $style;
-
-        return $this;
-    }
-
-    /**
-     * Get style
-     *
-     * @return string 
-     */
-    public function getStyle()
-    {
-        return $this->style;
-    }
-
-    /**
      * Set type
      *
      * @param string $type
@@ -191,5 +173,51 @@ class Restaurant
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set votes
+     *
+     * @param integer $votes
+     * @return Restaurant
+     */
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Get votes
+     *
+     * @return integer 
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * Set style
+     *
+     * @param \Mesd\LunchBundle\Entity\Style $style
+     * @return Restaurant
+     */
+    public function setStyle(\Mesd\LunchBundle\Entity\Style $style = null)
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+
+    /**
+     * Get style
+     *
+     * @return \Mesd\LunchBundle\Entity\Style 
+     */
+    public function getStyle()
+    {
+        return $this->style;
     }
 }

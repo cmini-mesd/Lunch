@@ -21,15 +21,23 @@ Mesd\LunchBundle\Entity\Restaurant:
         price:
             type: string
             length: '4'
-        style:
-            type: string
-            length: 255
         type:
             type: string
             length: 255
-        # votes:
-        #     type: integer
-        #     length: 2
-        #     nullable: true
+        voteTotal:
+            type: integer
+            length: 2
+            nullable: true
+            column: vote_total
+
+    manyToOne:
+        style:
+            targetEntity: Style 
+            inversedBy: restaurant 
+
+    oneToMany:
+        vote:
+            targetEntity: Vote
+            mappedBy: restaurant
 
     lifecycleCallbacks: {  }
