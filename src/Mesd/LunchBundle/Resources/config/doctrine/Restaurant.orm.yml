@@ -21,9 +21,9 @@ Mesd\LunchBundle\Entity\Restaurant:
         price:
             type: string
             length: '4'
-        type:
-            type: string
-            length: 255
+        # type:
+        #     type: string
+        #     length: 255
         voteTotal:
             type: integer
             length: 2
@@ -34,10 +34,17 @@ Mesd\LunchBundle\Entity\Restaurant:
         style:
             targetEntity: Style 
             inversedBy: restaurant 
+        type:
+            targetEntity: Type 
+            inversedBy: restaurant 
 
     oneToMany:
         vote:
             targetEntity: Vote
             mappedBy: restaurant
+
+
+
+
 
     lifecycleCallbacks: {  }

@@ -1,0 +1,24 @@
+Mesd\LunchBundle\Entity\Type:
+    type: entity
+    table: null
+    repositoryClass: Mesd\LunchBundle\Entity\TypeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+
+    oneToMany:
+        restaurant:
+            targetEntity: Restaurant 
+            mappedBy: type 
+
+
+
+
+    lifecycleCallbacks: {  }

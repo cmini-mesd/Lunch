@@ -1,7 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block title %} Restaurants {% endblock %}
 
-
     {% block body -%}
     {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="flash-notice">
@@ -9,41 +8,130 @@
     </div>
     {% endfor %}
 
-    <h1>Restaurant List</h1>
+    <h1><p class="cart">Lunch Application <small><i>Choose where you <u>don't</u> want to eat! </i></small> </p></h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Hours</th>
-                <th>Price</th>
-                <th>Style</th>
-                <th>Type</th>
-                {# <th>Actions</th> #}
-                <th>No-Votes</th>
-            </tr>
-        </thead>
+    <table class="table table-striped">
+        
+    
+                {# <th>Id</th> #}
+                <th><p class="chiv">Name</p></th>
+                <th><p class="chiv">Location</p></th>
+                <th><p class="chiv">Hours</p></th>
+                <th><p class="chiv">Price</p></th>
+                <th><p class="chiv">Style</p></th>
+                <th><p class="chiv">Type</p></th>
+                <th><p class="chiv">No-Votes</p></th>
+                <th><p class="chiv">Options</p></th>
+         
+   
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('restaurant_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.location }}</td>
+                {# <td><a href="{{ path('restaurant_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td> #}
+                <td>{{ entity.name }}</td> 
+                <td>{{ entity.location }}</td> 
                 <td>{{ entity.hours }}</td>
                 <td>{{ entity.price }}</td>
-                <td>{{ entity.style }}</td>
+                <td>{{ entity.style }}</td> 
                 <td>{{ entity.type }}</td>
-                <td>{{ entity.votes }}</td>
+                <td>{{ entity.voteTotal }}</td>
                 <td>
                 <ul>
-                    <li>
+
+
+                    
+<!-- Show Button trigger modal -->
+<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+  show
+</button>
+
+<!-- Show Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+
+        <p class= "chiv">Name</p>
+            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
+                {{ entity.name }}
+        <br>
+        <p class= "chiv">Location</p>
+            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
+                {{ entity.location }}
+        <br>
+        <p class= "chiv">Hours</p>
+            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
+                {{ entity.hours }}
+        <p class= "chiv">Price</p>
+            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
+                {{ entity.price }}
+        <br>
+        <p class= "chiv">Style</p>
+            <input class="form-control" type="text" placeholder="{{ entity.style }}" readonly>
+                
+        <br>
+        <p class= "chiv">Type</p>
+            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
+                {{ entity.type }}
+        <br>
+        <p class= "chiv">Vote Total</p>
+            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
+                {{ entity.voteTotal }}
+        <br>
+  
+     
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
                         <a href="{{ path('restaurant_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
+                    
+
+
+
+                    
                         <a href="{{ path('restaurant_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
+                   
+
+
+<!-- Edit Button trigger modal -->
+<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal{{entity.id}}">
+  edit
+</button>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="myModal{{entity.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+         {{form(editForms[entity.id])}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
                 </ul>
                 </td>
             </tr>
@@ -52,10 +140,58 @@
     </table>
 
         <ul>
-        <li>
-            <a href="{{ path('restaurant_new') }}">
+        
+            <a class="btn btn-primary btn-lg" href="{{ path('vote_new') }}" role="button"><p class="chiv">Cast your Vote!</p></a>
+
+
+{#             <a class="btn btn-default" href="{{ path('restaurant_new') }}" role="button"><p class="chiv">
                 Create a new entry
-            </a>
-        </li>
-    </ul>
+            </p></a> #}
+        
+    
+
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModalNew">
+  <p class= "chiv">Create a New Entry</p>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModalNew" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+            {{ form_start(newForm) }}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2><p class = "cart">Restaurant Creation</p></h2>
+      </div>
+      <div class="modal-body">
+        <p class = "chiv"> 
+
+            {{ form_row(newForm.name) }}
+            <div class="hidden">
+                {{ form_row(newForm.vote) }}
+            </div>
+
+          {#   {{ form_rest(newForm) }} #}
+          {{form_row(newForm.location)}}
+          {{form_row(newForm.hours)}}
+          {{form_row(newForm.price)}}
+          {{form_row(newForm.style)}}
+          {{form_row(newForm.type)}}
+
+        </p>
+      </div>
+      <div class="modal-footer">
+        {{form_widget(newForm.submit)}}
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  
+        
+      </div>
+      {{ form_end(newForm) }}
+    </div>
+  </div>
+</div>
+
+</ul>
     {% endblock %}

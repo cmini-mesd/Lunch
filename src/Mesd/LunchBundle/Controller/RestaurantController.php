@@ -25,8 +25,19 @@ class RestaurantController extends Controller
 
         $entities = $em->getRepository('MesdLunchBundle:Restaurant')->findAll();
 
+        foreach($entities as $entityKey => $entityValue){
+            $editForms[$entityValue->getId()] = $this->createEditForm($entityValue)->createView();
+
+        }
+
+        $entity = new Restaurant();
+        $newForm   = $this->createCreateForm($entity)->createView();
+        
+       
         return $this->render('MesdLunchBundle:Restaurant:index.html.twig', array(
             'entities' => $entities,
+            'newForm'   => $newForm, 
+            'editForms' => $editForms,
         ));
     }
     /**
@@ -69,6 +80,7 @@ class RestaurantController extends Controller
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
+
         return $form;
     }
 
@@ -84,6 +96,8 @@ class RestaurantController extends Controller
         return $this->render('MesdLunchBundle:Restaurant:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+
+
         ));
     }
 

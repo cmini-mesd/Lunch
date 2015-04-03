@@ -220,7 +220,7 @@ class Restaurant
      * @param \Mesd\LunchBundle\Entity\Style $style
      * @return Restaurant
      */
-    public function setStyle(\Mesd\LunchBundle\Entity\Style $style = null)
+    public function setStyle($style)
     {
         $this->style = $style;
 

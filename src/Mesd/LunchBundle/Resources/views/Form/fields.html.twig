@@ -8,10 +8,70 @@
         {%- endif -%}
         {%- if required -%}
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+                
         {%- endif -%}
         {%- if label is empty -%}
             {% set label = name|humanize %}
+                <br>
         {%- endif -%}
         <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
     {%- endif -%}
 {%- endblock form_label -%}
+
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+    <input class="form-control" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+
+{%- endblock form_widget_simple -%}
+
+{%- block form_row -%}
+    <div class="form-group">
+        <div class = "row">
+            <div class = "col-md-6">
+                <label for="{{form.parent.vars.name}}_{{form.vars.name}}">{{form_label(form)}}</label>
+                {{- form_errors(form) -}}
+                {{- form_widget(form) -}}
+            </div>
+        </div>
+    </div>
+{%- endblock form_row -%}
+
+ {%- block choice_widget_collapsed -%}
+    {%- if required and empty_value is none and not empty_value_in_choices and not multiple -%}
+        {% set required = false %}
+    {%- endif -%}
+    <select class = "form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {%- if empty_value is not none -%}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+        {%- endif -%}
+        {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {{- block('choice_widget_options') -}}
+            {%- if choices|length > 0 and separator is not none -%}
+                <option disabled="disabled">{{ separator }}</option>
+            {%- endif -%}
+        {%- endif -%}
+        {%- set options = choices -%}
+        {{- block('choice_widget_options') -}}
+    </select>
+{%- endblock choice_widget_collapsed -%}
+
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {% set label = name|humanize %}
+    {%- endif -%}
+    {% if bootstrap is defined %} {% else %} {% set bootstrap = "btn btn-default" %} {% endif %} 
+    <button class ="{{bootstrap}}" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
+{%- endblock button_widget -%}
+
+{%- block submit_widget -%}
+    {%- set type = type|default('submit') -%}
+    {%- set bootstrap = 'btn btn-primary' -%}
+    {{ block('button_widget') }}
+{%- endblock submit_widget -%}
+
+{%- block delete_widget -%}
+    {%- set type = type|default('delete') -%}
+    {%- set bootstrap = 'btn btn-danger' -%}
+    {{ block('button_widget') }}
+{%- endblock delete_widget -%}

@@ -5,6 +5,7 @@
     <div class="flash-notice">
         {{ flashMessage }}
     </div>
+   
 {% endfor %}
 
     <h1>Restaurant Edit</h1>
@@ -14,7 +15,6 @@
  {{form_start(edit_form)}}
  {{form_row(edit_form.name)}}
  {{form_label(edit_form.style)}}
- <br>
  {{form_widget(edit_form.style)}}
  {{form_rest(edit_form)}}
  {{form_end(edit_form)}}

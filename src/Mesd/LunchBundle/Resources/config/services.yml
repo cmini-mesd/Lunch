@@ -2,3 +2,8 @@ services:
 #    mesd_lunch.example:
 #        class: Mesd\LunchBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+    mesd_lunch_bundle.delete_type_extension:
+        class: Mesd\LunchBundle\Form\Extension\DeleteTypeExtension
+        tags:
+            - { name: form.type_extension, alias: button}
