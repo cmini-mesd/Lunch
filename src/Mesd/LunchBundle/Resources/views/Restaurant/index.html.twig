@@ -11,8 +11,8 @@
     <h1><p class="cart">Lunch Application <small><i>Choose where you <u>don't</u> want to eat! </i></small> </p></h1>
 
     <table class="table table-striped">
-        
-    
+
+
                 {# <th>Id</th> #}
                 <th><p class="chiv">Name</p></th>
                 <th><p class="chiv">Location</p></th>
@@ -22,24 +22,24 @@
                 <th><p class="chiv">Type</p></th>
                 <th><p class="chiv">No-Votes</p></th>
                 <th><p class="chiv">Options</p></th>
-         
-   
+
+
         <tbody>
         {% for entity in entities %}
             <tr>
                 {# <td><a href="{{ path('restaurant_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td> #}
-                <td>{{ entity.name }}</td> 
-                <td>{{ entity.location }}</td> 
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.location }}</td>
                 <td>{{ entity.hours }}</td>
                 <td>{{ entity.price }}</td>
-                <td>{{ entity.style }}</td> 
+                <td>{{ entity.style }}</td>
                 <td>{{ entity.type }}</td>
                 <td>{{ entity.voteTotal }}</td>
                 <td>
                 <ul>
 
 
-                    
+
 <!-- Show Button trigger modal -->
 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
   show
@@ -72,7 +72,7 @@
         <br>
         <p class= "chiv">Style</p>
             <input class="form-control" type="text" placeholder="{{ entity.style }}" readonly>
-                
+
         <br>
         <p class= "chiv">Type</p>
             <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
@@ -82,8 +82,8 @@
             <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
                 {{ entity.voteTotal }}
         <br>
-  
-     
+
+
 
       </div>
       <div class="modal-footer">
@@ -97,13 +97,13 @@
 
 
                         <a href="{{ path('restaurant_show', { 'id': entity.id }) }}">show</a>
-                    
 
 
 
-                    
+
+
                         <a href="{{ path('restaurant_edit', { 'id': entity.id }) }}">edit</a>
-                   
+
 
 
 <!-- Edit Button trigger modal -->
@@ -140,15 +140,15 @@
     </table>
 
         <ul>
-        
+
             <a class="btn btn-primary btn-lg" href="{{ path('vote_new') }}" role="button"><p class="chiv">Cast your Vote!</p></a>
 
 
 {#             <a class="btn btn-default" href="{{ path('restaurant_new') }}" role="button"><p class="chiv">
                 Create a new entry
             </p></a> #}
-        
-    
+
+
 
 
     <!-- Button trigger modal -->
@@ -166,7 +166,7 @@
         <h2><p class = "cart">Restaurant Creation</p></h2>
       </div>
       <div class="modal-body">
-        <p class = "chiv"> 
+        <p class = "chiv">
 
             {{ form_row(newForm.name) }}
             <div class="hidden">
@@ -185,8 +185,8 @@
       <div class="modal-footer">
         {{form_widget(newForm.submit)}}
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  
-        
+
+
       </div>
       {{ form_end(newForm) }}
     </div>

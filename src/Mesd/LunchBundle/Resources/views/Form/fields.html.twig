@@ -8,7 +8,7 @@
         {%- endif -%}
         {%- if required -%}
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-                
+
         {%- endif -%}
         {%- if label is empty -%}
             {% set label = name|humanize %}
@@ -60,7 +60,8 @@
     {%- if label is empty -%}
         {% set label = name|humanize %}
     {%- endif -%}
-    {% if bootstrap is defined %} {% else %} {% set bootstrap = "btn btn-default" %} {% endif %} 
+    {% if delete is defined %}{%set bootstrap = 'btn btn-danger' %}{% endif %}
+    {% if bootstrap is defined %}{% else %}{% set bootstrap = "btn btn-default" %}{% endif %}
     <button class ="{{bootstrap}}" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
 {%- endblock button_widget -%}
 
@@ -69,9 +70,3 @@
     {%- set bootstrap = 'btn btn-primary' -%}
     {{ block('button_widget') }}
 {%- endblock submit_widget -%}
-
-{%- block delete_widget -%}
-    {%- set type = type|default('delete') -%}
-    {%- set bootstrap = 'btn btn-danger' -%}
-    {{ block('button_widget') }}
-{%- endblock delete_widget -%}
