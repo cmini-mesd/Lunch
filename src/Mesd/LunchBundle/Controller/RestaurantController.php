@@ -24,7 +24,7 @@ class RestaurantController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('MesdLunchBundle:Restaurant')->findAll();
-
+       $editForms = [];
         foreach($entities as $entityKey => $entityValue){
             $editForms[$entityValue->getId()] = $this->createEditForm($entityValue)->createView();
 

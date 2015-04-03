@@ -51,36 +51,36 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h2 class="modal-title" id="myModalLabel"><p class = "cart">Viewing Restaurant</p></h2>
       </div>
       <div class="modal-body">
 
-        <p class= "chiv">Name</p>
-            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
-                {{ entity.name }}
+        <b><p class= "chiv">Name</p></b>
+            <input class="form-control" type="text" placeholder="{{ entity.name }}" readonly>
+                
         <br>
-        <p class= "chiv">Location</p>
-            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
-                {{ entity.location }}
+        <b><p class= "chiv">Location</p></b>
+            <input class="form-control" type="text" placeholder="{{ entity.location }}" readonly>
+                
         <br>
-        <p class= "chiv">Hours</p>
-            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
-                {{ entity.hours }}
-        <p class= "chiv">Price</p>
-            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
-                {{ entity.price }}
+        <b><p class= "chiv">Hours</p></b>
+            <input class="form-control" type="text" placeholder="{{ entity.hours }}" readonly>
+                
+        <b><p class= "chiv">Price</p></b>
+            <input class="form-control" type="text" placeholder="{{ entity.price }}" readonly>
+                
         <br>
-        <p class= "chiv">Style</p>
+        <b><p class= "chiv">Style</p></b>
             <input class="form-control" type="text" placeholder="{{ entity.style }}" readonly>
                 
         <br>
-        <p class= "chiv">Type</p>
-            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
-                {{ entity.type }}
+        <b><p class= "chiv">Type</p></b>
+            <input class="form-control" type="text" placeholder="{{ entity.type }}" readonly>
+                
         <br>
-        <p class= "chiv">Vote Total</p>
-            <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
-                {{ entity.voteTotal }}
+        <b><p class= "chiv">Vote Total</p></b>
+            <input class="form-control" type="text" placeholder="{{ entity.voteTotal }}" readonly>
+                
         <br>
   
      
@@ -88,14 +88,14 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+    
       </div>
     </div>
   </div>
 </div>
 
 
-
+{# 
                         <a href="{{ path('restaurant_show', { 'id': entity.id }) }}">show</a>
                     
 
@@ -103,7 +103,7 @@
 
                     
                         <a href="{{ path('restaurant_edit', { 'id': entity.id }) }}">edit</a>
-                   
+                    #}
 
 
 <!-- Edit Button trigger modal -->
@@ -116,15 +116,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            <h2 class="modal-title" id="myModalLabel"><p class = "cart"> Editing Restaurant</p></h2>
       </div>
-      <div class="modal-body">
-         {{form(editForms[entity.id])}}
-      </div>
+        <p class = "chiv"> <br>{{form(editForms[entity.id])}}</p>
       <div class="modal-footer">
+      {#   {{form_widget(editForms.submit)}} #}
+
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        
       </div>
     </div>
   </div>
@@ -142,13 +143,6 @@
         <ul>
         
             <a class="btn btn-primary btn-lg" href="{{ path('vote_new') }}" role="button"><p class="chiv">Cast your Vote!</p></a>
-
-
-{#             <a class="btn btn-default" href="{{ path('restaurant_new') }}" role="button"><p class="chiv">
-                Create a new entry
-            </p></a> #}
-        
-    
 
 
     <!-- Button trigger modal -->
@@ -192,6 +186,10 @@
     </div>
   </div>
 </div>
+
+
+
+
 
 </ul>
     {% endblock %}
