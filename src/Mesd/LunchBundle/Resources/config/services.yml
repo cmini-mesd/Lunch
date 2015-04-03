@@ -6,7 +6,7 @@ services:
     mesd_lunch_bundle.delete_type_extension:
         class: Mesd\LunchBundle\Form\Extension\DeleteTypeExtension
         tags:
-            - { name: form.type_extension, alias: button }
+            - { name: form.type_extension, alias: submit }
 
     mesd_lunch_bundle.delete_type:
         class: Mesd\LunchBundle\Form\DeleteType

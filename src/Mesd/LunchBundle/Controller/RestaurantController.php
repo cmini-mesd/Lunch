@@ -28,6 +28,7 @@ class RestaurantController extends Controller
         $editForms = [];
         foreach($entities as $entityKey => $entityValue){
             $editForms[$entityValue->getId()] = $this->createEditForm($entityValue)->createView();
+            $deleteForms[$entityValue->getId()] = $this-> createDeleteForm($entityValue)->createView();
         }
 
         $entity = new Restaurant();
@@ -38,6 +39,7 @@ class RestaurantController extends Controller
             'entities' => $entities,
             'newForm'   => $newForm,
             'editForms' => $editForms,
+            'deleteForms' => $deleteForms,
         ));
     }
     /**
@@ -233,7 +235,7 @@ class RestaurantController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('restaurant_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('delete', 'delete', array('label' => 'Delete'))
             ->getForm()
         ;
     }

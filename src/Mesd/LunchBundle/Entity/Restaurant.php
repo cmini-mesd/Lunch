@@ -61,7 +61,10 @@ class Restaurant
     {
         $this->vote = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -269,4 +272,7 @@ class Restaurant
     {
         $this->vote->removeElement($vote);
     }
+
+
+
 }

@@ -60,7 +60,6 @@
     {%- if label is empty -%}
         {% set label = name|humanize %}
     {%- endif -%}
-    {% if delete is defined %}{%set bootstrap = 'btn btn-danger' %}{% endif %}
     {% if bootstrap is defined %}{% else %}{% set bootstrap = "btn btn-default" %}{% endif %}
     <button class ="{{bootstrap}}" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
 {%- endblock button_widget -%}
@@ -68,5 +67,6 @@
 {%- block submit_widget -%}
     {%- set type = type|default('submit') -%}
     {%- set bootstrap = 'btn btn-primary' -%}
+    {% if delete is defined %}{%set bootstrap = 'btn btn-danger' %}{% endif %}
     {{ block('button_widget') }}
 {%- endblock submit_widget -%}

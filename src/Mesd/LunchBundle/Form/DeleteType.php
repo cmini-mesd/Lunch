@@ -24,7 +24,7 @@ class DeleteType extends AbstractType implements ButtonTypeInterface
 
     public function getParent()
     {
-        return 'button';
+        return 'submit';
     }
 
     /**
@@ -33,5 +33,9 @@ class DeleteType extends AbstractType implements ButtonTypeInterface
     public function getName()
     {
         return 'delete';
+    }
+    public function isClicked()
+    {
+        
     }
 }

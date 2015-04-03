@@ -35,6 +35,6 @@ class DeleteTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'button';
+        return 'submit';
     }
 }
