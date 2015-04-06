@@ -35,19 +35,34 @@ class VoteController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Vote();
-        $form = $this->createCreateForm($entity);
+
+        $form = $this->createCreateForm();
         $form->handleRequest($request);
+        $data = $form->getData();
+
+
+       
+
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+           
+            foreach ($data['restaurant'] as $restaurant) {
+                $vote = new Vote();
+                $total = $restaurant->getVoteTotal();
+                $total++;
+                $restaurant -> setVoteTotal($total);  
 
-            return $this->redirect($this->generateUrl('vote_show', array('id' => $entity->getId())));
+            }
+            var_dump($request->getClientIp());
+            die;
+            $em->flush();
+           
+
+            return $this->redirect($this->generateUrl('restaurant'));
         }
 
-        return $this->render('MesdLunchBundle:Vote:new.html.twig', array(
+        return $this->render('MesdLunchBundle:Restaurant:index.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -60,9 +75,9 @@ class VoteController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Vote $entity)
+    private function createCreateForm()
     {
-        $form = $this->createForm(new VoteType(), $entity, array(
+        $form = $this->createForm(new VoteType(), NULL, array(
             'action' => $this->generateUrl('vote_create'),
             'method' => 'POST',
         ));

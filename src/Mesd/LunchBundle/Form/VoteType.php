@@ -15,19 +15,13 @@ class VoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('voter_id')
-            ->add('vote_date')
-            ->add('restaurant')
-        ;
-    }
-    
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'Mesd\LunchBundle\Entity\Vote'
+            // ->add('voter_id')
+            // ->add('vote_date')
+            ->add('restaurant', 'entity', array(
+                'class' => 'MesdLunchBundle:Restaurant', 
+                'expanded'=>true, 
+                'multiple'=>true
+
         ));
     }
 

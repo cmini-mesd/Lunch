@@ -4,10 +4,10 @@ namespace Mesd\LunchBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\ButtonTypeInterface;
+use Symfony\Component\Form\SubmitButtonTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DeleteType extends AbstractType implements ButtonTypeInterface
+class DeleteType extends AbstractType implements SubmitButtonTypeInterface
 {
 
     /**
@@ -33,9 +33,5 @@ class DeleteType extends AbstractType implements ButtonTypeInterface
     public function getName()
     {
         return 'delete';
-    }
-    public function isClicked()
-    {
-        
     }
 }

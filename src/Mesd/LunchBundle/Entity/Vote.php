@@ -14,6 +14,11 @@ class Vote
      */
     private $id;
 
+   /**** 
+    * @var string
+    */
+    private $name;
+
     /**
      * @var integer
      */
@@ -29,7 +34,12 @@ class Vote
      */
     private $restaurant;
 
+    public function __toString()
+    {
+        return $this->voter_id."";
+    }
 
+ 
     /**
      * Get id
      *
@@ -39,6 +49,10 @@ class Vote
     {
         return $this->id;
     }
+
+
+
+
 
     /**
      * Set voter_id

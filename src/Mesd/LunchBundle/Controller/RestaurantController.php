@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Mesd\LunchBundle\Entity\Restaurant;
 use Mesd\LunchBundle\Form\RestaurantType;
+use Mesd\LunchBundle\Form\VoteType;
 
 /**
  * Restaurant controller.
@@ -28,20 +29,44 @@ class RestaurantController extends Controller
         $editForms = [];
         foreach($entities as $entityKey => $entityValue){
             $editForms[$entityValue->getId()] = $this->createEditForm($entityValue)->createView();
-            $deleteForms[$entityValue->getId()] = $this-> createDeleteForm($entityValue)->createView();
+            $deleteForms[$entityValue->getId()] = $this-> createDeleteForm($entityValue->getId())->createView();
         }
 
         $entity = new Restaurant();
         $newForm   = $this->createCreateForm($entity)->createView();
-
+        $voteForm   = $this->createVoteForm()->createView();
 
         return $this->render('MesdLunchBundle:Restaurant:index.html.twig', array(
             'entities' => $entities,
             'newForm'   => $newForm,
             'editForms' => $editForms,
             'deleteForms' => $deleteForms,
+            'voteForm' => $voteForm,
         ));
+
+
     }
+
+
+    /**
+     * Creates a form to create a Vote entity.
+     *
+     * @param Vote $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createVoteForm()
+    {
+        $form = $this->createForm(new VoteType(), NULL, array(
+            'action' => $this->generateUrl('vote_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+
     /**
      * Creates a new Restaurant entity.
      *
