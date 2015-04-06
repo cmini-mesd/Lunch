@@ -10,7 +10,7 @@ Mesd\LunchBundle\Entity\Vote:
                 strategy: AUTO
     fields:
         voter_id:
-            type: integer
+            type: string
             length: 100
         vote_date: 
             type: date 

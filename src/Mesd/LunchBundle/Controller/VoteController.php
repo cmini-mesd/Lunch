@@ -49,13 +49,18 @@ class VoteController extends Controller
            
             foreach ($data['restaurant'] as $restaurant) {
                 $vote = new Vote();
+                $voterId =  $request->getClientIp();
+                $vote -> setVoterId($voterId);
+                $date = new \DateTime();
+                $vote -> setVoteDate($date);
+                $em->persist($vote);
                 $total = $restaurant->getVoteTotal();
                 $total++;
                 $restaurant -> setVoteTotal($total);  
 
             }
-            var_dump($request->getClientIp());
-            die;
+           
+            
             $em->flush();
            
 

@@ -20,7 +20,7 @@ class Vote
     private $name;
 
     /**
-     * @var integer
+     * @var string
      */
     private $voter_id;
 
@@ -57,7 +57,7 @@ class Vote
     /**
      * Set voter_id
      *
-     * @param integer $voterId
+     * @param string $voterId
      * @return Vote
      */
     public function setVoterId($voterId)
@@ -70,7 +70,7 @@ class Vote
     /**
      * Get voter_id
      *
-     * @return integer 
+     * @return string 
      */
     public function getVoterId()
     {

@@ -10,7 +10,7 @@
 
     <h1><p class="cart">Lunch Application <small><i>Choose where you <u>don't</u> want to eat! </i></small> </p></h1>
 
-{{form(voteForm)}}
+
 
     <table class="table table-striped">
 
@@ -35,6 +35,7 @@
                 {# <td><a href="{{ path('restaurant_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td> #}
                 
                 <td><form action = "{{ path('vote_create') }}" input type = "checkbox" name = "noVote" value = "1"></td>
+                {% for entity in entities %}<td> {{form(voteForm)}}</td> {% endfor %}
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.location }}</td>
                 <td>{{ entity.hours }}</td>
