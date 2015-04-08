@@ -7,6 +7,24 @@
     </div>
    
 {% endfor %}
+<div class="modal-content" style = "float:center">
+           
+      <div class="modal-header">
 
-{{restaurant}}
+        <h1><p class = "cart">Today's Lunch will be at...</p></h2>
+      </div>
+      <div class="modal-body">
+        <p class = "chiv"><h2>
+
+        	<b>{{restaurant}}</b>
+        	<br>
+        	<i>{{restaurant.location}}</i>
+        </p></h2>
+      </div>
+      <div class="modal-footer">
+        
+<a href = "{{path('restaurant')}}" style = "float:right">
+        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Return to Restaurant List</button>
+</a>
+
 {% endblock %}

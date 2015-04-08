@@ -44,7 +44,12 @@ class RestaurantController extends Controller
         $voteForm->handleRequest($request);
         $data = $voteForm->getData();
 
+        if ($voteForm->isValid()) {
+            $em->flush();
 
+            $request->getSession()->getFlashBag()->add('notice','Your votes have been submitted!');
+            
+        }
        
 
 
@@ -101,7 +106,7 @@ class RestaurantController extends Controller
         ));
 
         $form->add('castVote', 'submit', array('label' => 'Cast your vote!'));
-
+        
         return $form;
     }
 

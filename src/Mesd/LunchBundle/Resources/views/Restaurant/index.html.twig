@@ -4,17 +4,20 @@
     {% block body -%}
     {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="flash-notice">
-        {{ flashMessage }}
+
+        <p class = "bg-success" align = "center"><b><f class = "#box">{{ flashMessage }}</f><b></p>
     </div>
     {% endfor %}
 
     <h1><p class="cart">Lunch Application <small><i>Choose where you <u>don't</u> want to eat! </i></small> 
      
-        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalChosen" style="float:right">
-          <span class= "chiv">Where's Lunch Today?</span>
+     <a href = "{{path('chosen')}}" style = "float:right">
+        <button type="button" class="btn btn-success btn-lg"  align = "right">
+          <span class= "chiv"  align = "right">Where's Lunch Today?</span>
         </button>
-      
-    </p></h1>
+      </a>
+     </p></h1>
+     <br>
 
 
 
@@ -23,7 +26,7 @@
 
 
                 {# <th>Id</th> #}
-                <th><p class="chiv">No-Votes</p></th>
+                <b><th><p class="chiv">No-Votes</p></th>
                 <th><p class="chiv">Name</p></th>
                 <th><p class="chiv">Location</p></th>
                 <th><p class="chiv">Hours</p></th>
@@ -31,7 +34,7 @@
                 <th><p class="chiv">Style</p></th>
                 <th><p class="chiv">Type</p></th>
                 
-                <th><p class="chiv">Options</p></th>
+                <th><p class="chiv">Options</p></th></b>
 
 
 
@@ -79,9 +82,10 @@
   <p class = "chiv">Cast your Vote!</p>
 </button> #}
 <div class = "row">
-  <div class = "col-md-1">
+  <div class = "col-md-1" data-toggle="modal" data-target="#myModalVote">
     {{form_widget(voteForm.castVote)}}
     {{form_end(voteForm)}}
+
    </div>
    
 
@@ -93,7 +97,7 @@
   </div>
 </div>
 <!-- Vote Modal -->
-<div class="modal fade" id="myModalVote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+{# <div class="modal fade" id="myModalVote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -103,46 +107,22 @@
     <br>    
       </div>
 
-      {# {{form_start(editForms[entity.id])}} #}
       <div class="modal-body">
-{#           {{form_row(editForms[entity.id].name)}}
-          {{form_row(editForms[entity.id].location)}}
-          {{form_row(editForms[entity.id].hours)}}
-          {{form_row(editForms[entity.id].price)}}
-          {{form_row(editForms[entity.id].style)}}
-          {{form_row(editForms[entity.id].type)}}
-          <div class="hidden">
-                {{ form_row(editForms[entity.id].vote) }}
 
-          </div> #}
-
-         <h2 class="modal-title" id="myModalLabel"><p class="cart"> Your Votes Have Been Saved</p></h2>
+         <h2 class="modal-title" id="myModalVote"><p class="cart"> Your Votes Have Been Saved</p></h2>
       </div>
       <div class="modal-footer">
-        <div class = "row">
-        <div class = "col-md-6">
-            <span class="pull-left">
-       {#  {{form_widget(editForms[entity.id].submit)}} #}
-        </span>
-       {#  {{form_end(editForms[entity.id])}}  #}
-        </div>
-        <div class = "col-md-6">
-       
-       {#  {{form_start(deleteForms[entity.id])}} #}
-        {# <a class="btn btn-primary btn-lg" href="{{ path('vote_new') }}" role="button"><p class="chiv">Delete</p></a> #}
-       
-        {# {{form_widget(deleteForms[entity.id].delete)}} #}
+
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
        
-       {#  {{form_end(deleteForms[entity.id])}} #}
+    
         </div>
-        </div>
-        {# {{form_row(edit)}} #}
+    
       </div>
     </div>
   </div>
 </div>
-
+ #}
 </form>
 
             {# <a class="btn btn-primary btn-lg" href="{{ path('vote_new') }}" role="button"><p class="chiv">Cast your Vote!</p></a> #}
@@ -315,32 +295,6 @@
 
 </ul>
 
-<!-- Chosen Modal -->
-<div class="modal fade" id="myModalChosen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-          {#  form start will go here #}
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h2><p class = "cart">Today's Lunch will be at...</p></h2>
-      </div>
-      <div class="modal-body">
-        <p class = "chiv">
-          {% for restaurant in voteForm.restaurant %}
-            {% set index = restaurant.vars.value %}
-            {% set entity = voteForm.restaurant.vars.choices[index].data %}
-
-            {{entity.name}}
-          {% endfor %}
-        </p>
-      </div>
-      <div class="modal-footer">
-        
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-
-      </div>
-   {# form end will go here #}
     </div>
   </div>
 </div>
