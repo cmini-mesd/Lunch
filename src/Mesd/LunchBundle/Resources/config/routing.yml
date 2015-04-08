@@ -14,6 +14,10 @@ mesd_lunch_homepage:
     path:     /hello/{name}
     defaults: { _controller: MesdLunchBundle:Default:index }
 
+mesd_lunch_chosen:
+    resource: "@MesdLunchBundle/Resources/config/routing/chosen.yml"
+    prefix: /chosen
+
 # mesd_lunch_voting:
 #     resource: "@MesdLunchBundle/Resources/config/routing/voting.yml"
 #     prefix:   /voting

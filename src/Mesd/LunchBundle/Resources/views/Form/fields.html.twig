@@ -70,3 +70,10 @@
     {% if delete is defined %}{%set bootstrap = 'btn btn-danger' %}{% endif %}
     {{ block('button_widget') }}
 {%- endblock submit_widget -%}
+
+{%- block _mesd_lunchbundle_vote_castVote_widget -%}
+    {%- set type = type|default('submit') -%}
+    {%- set bootstrap = 'btn btn-primary btn-lg' -%}
+    {% if delete is defined %}{%set bootstrap = 'btn btn-lg btn-danger' %}{% endif %}
+    <button class ="{{bootstrap}}" type="{{ type|default('button') }}" {{ block('button_attributes') }}><span class="chiv">{{ label|trans({}, translation_domain) }}</span></button>   
+{%- endblock _mesd_lunchbundle_vote_castVote_widget -%}

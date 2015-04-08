@@ -37,36 +37,7 @@ class VoteController extends Controller
     {
 
         $form = $this->createCreateForm();
-        $form->handleRequest($request);
-        $data = $form->getData();
-
-
        
-
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-           
-            foreach ($data['restaurant'] as $restaurant) {
-                $vote = new Vote();
-                $voterId =  $request->getClientIp();
-                $vote -> setVoterId($voterId);
-                $date = new \DateTime();
-                $vote -> setVoteDate($date);
-                $em->persist($vote);
-                $total = $restaurant->getVoteTotal();
-                $total++;
-                $restaurant -> setVoteTotal($total);  
-
-            }
-           
-            
-            $em->flush();
-           
-
-            return $this->redirect($this->generateUrl('restaurant'));
-        }
-
         return $this->render('MesdLunchBundle:Restaurant:index.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),

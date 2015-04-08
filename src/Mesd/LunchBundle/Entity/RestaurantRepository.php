@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class RestaurantRepository extends EntityRepository
 {
+	public function findRestaurant()
+	{
+		$count = $this->createQueryBuilder('r')
+			->select('COUNT(r)')
+			->getQuery()
+			->getSingleScalarResult();
+		return $this->createQueryBuilder('r')
+			->setFirstResult(rand(0, $count - 1))
+			->setMaxResults(1)
+			->getQuery()
+			->getSingleResult();
+	}
 }

@@ -8,10 +8,17 @@
     </div>
     {% endfor %}
 
-    <h1><p class="cart">Lunch Application <small><i>Choose where you <u>don't</u> want to eat! </i></small> </p></h1>
+    <h1><p class="cart">Lunch Application <small><i>Choose where you <u>don't</u> want to eat! </i></small> 
+     
+        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalChosen" style="float:right">
+          <span class= "chiv">Where's Lunch Today?</span>
+        </button>
+      
+    </p></h1>
 
 
 
+      {{form_start(voteForm)}}
     <table class="table table-striped">
 
 
@@ -30,12 +37,21 @@
 
     
         <tbody>
-        {% for entity in entities %}
+        {% for restaurant in voteForm.restaurant %}
+          {% set index = restaurant.vars.value %}
+
+          {% set entity = voteForm.restaurant.vars.choices[index].data %}
             <tr>
                 {# <td><a href="{{ path('restaurant_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td> #}
                 
-                <td><form action = "{{ path('vote_create') }}" input type = "checkbox" name = "noVote" value = "1"></td>
-                {% for entity in entities %}<td> {{form(voteForm)}}</td> {% endfor %}
+                {# <td> #}{# <form action = "{{ path('vote_create') }}" input type = "checkbox" name = "noVote" value = "1"> #}{# td>
+ #}                <td> {{form_widget(restaurant)}}</td>
+                {# <td> #}
+               {#  {% for child in voteForm%}
+                  {% set restaurantEntity = voteForm.vars.data %}
+                  <li>{{form_widget(child)}}</li>
+                {% endfor %} #}
+                {# </td> #}
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.location }}</td>
                 <td>{{ entity.hours }}</td>
@@ -52,27 +68,30 @@
                   edit
                 </button>
                 </td>      
-                
-                <ul>
-
-                </ul>
-                
             </tr>
 
         {% endfor %}
         </tbody>
-    </table>
-
-        <ul>
-
-
-
+    </table>  
 
 <!-- Vote Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalVote">
+{# <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalVote">
   <p class = "chiv">Cast your Vote!</p>
-</button>
+</button> #}
+<div class = "row">
+  <div class = "col-md-1">
+    {{form_widget(voteForm.castVote)}}
+    {{form_end(voteForm)}}
+   </div>
+   
 
+  <div class = "col-md-1">
+   <!-- Button trigger modal -->
+    <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModalNew">
+      <span class= "chiv">Create a New Entry</span>
+    </button>
+  </div>
+</div>
 <!-- Vote Modal -->
 <div class="modal fade" id="myModalVote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -253,10 +272,7 @@
 
 
 
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModalNew">
-  <p class= "chiv">Create a New Entry</p>
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModalNew" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -296,5 +312,39 @@
   </div>
 </div>
 
+
 </ul>
+
+<!-- Chosen Modal -->
+<div class="modal fade" id="myModalChosen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+          {#  form start will go here #}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2><p class = "cart">Today's Lunch will be at...</p></h2>
+      </div>
+      <div class="modal-body">
+        <p class = "chiv">
+          {% for restaurant in voteForm.restaurant %}
+            {% set index = restaurant.vars.value %}
+            {% set entity = voteForm.restaurant.vars.choices[index].data %}
+
+            {{entity.name}}
+          {% endfor %}
+        </p>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+      </div>
+   {# form end will go here #}
+    </div>
+  </div>
+</div>
+
+</ul>
+
 {% endblock %}

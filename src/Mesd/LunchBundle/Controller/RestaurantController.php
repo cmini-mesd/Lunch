@@ -9,6 +9,8 @@ use Mesd\LunchBundle\Entity\Restaurant;
 use Mesd\LunchBundle\Form\RestaurantType;
 use Mesd\LunchBundle\Form\VoteType;
 
+use Mesd\LunchBundle\Entity\Vote;
+
 /**
  * Restaurant controller.
  *
@@ -20,12 +22,12 @@ class RestaurantController extends Controller
      * Lists all Restaurant entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('MesdLunchBundle:Restaurant')->findAll();
-
+        
         $editForms = [];
         foreach($entities as $entityKey => $entityValue){
             $editForms[$entityValue->getId()] = $this->createEditForm($entityValue)->createView();
@@ -34,14 +36,50 @@ class RestaurantController extends Controller
 
         $entity = new Restaurant();
         $newForm   = $this->createCreateForm($entity)->createView();
-        $voteForm   = $this->createVoteForm()->createView();
+
+        $voteForm   = $this->createVoteForm();
+
+        $voteFormView = $voteForm->createView();
+
+        $voteForm->handleRequest($request);
+        $data = $voteForm->getData();
+
+
+       
+
+
+        if ($voteForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+           
+            foreach ($data['restaurant'] as $restaurant) {
+                $vote = new Vote();
+                $voterId =  $request->getClientIp();
+                $vote -> setVoterId($voterId);
+                $date = new \DateTime();
+                $vote -> setVoteDate($date);
+                $em->persist($vote);
+                $total = $restaurant->getVoteTotal();
+                $total++;
+                $restaurant -> setVoteTotal($total);  
+
+            }
+           
+            
+            $em->flush();
+           
+
+            return $this->redirect($this->generateUrl('restaurant'));
+        }
+
+
 
         return $this->render('MesdLunchBundle:Restaurant:index.html.twig', array(
             'entities' => $entities,
             'newForm'   => $newForm,
             'editForms' => $editForms,
             'deleteForms' => $deleteForms,
-            'voteForm' => $voteForm,
+            'voteForm' => $voteFormView,
+
         ));
 
 
@@ -58,11 +96,11 @@ class RestaurantController extends Controller
     private function createVoteForm()
     {
         $form = $this->createForm(new VoteType(), NULL, array(
-            'action' => $this->generateUrl('vote_create'),
+            'action' => $this->generateUrl('restaurant'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('castVote', 'submit', array('label' => 'Cast your vote!'));
 
         return $form;
     }
@@ -82,7 +120,7 @@ class RestaurantController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('restaurant_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('restaurant'));
         }
 
         return $this->render('MesdLunchBundle:Restaurant:new.html.twig', array(

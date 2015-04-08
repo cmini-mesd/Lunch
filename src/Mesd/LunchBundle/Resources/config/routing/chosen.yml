@@ -1,0 +1,13 @@
+chosen:
+    path:     /
+    defaults: { _controller: "MesdLunchBundle:Chosen:index" }
+
+chosen_show:
+    path:     /{id}/show
+    defaults: { _controller: "MesdLunchBundle:Chosen:show" }
+
+chosen_update:
+    path:     /{id}/update
+    defaults: { _controller: "MesdLunchBundle:Chosen:update" }
+    requirements: { _method: post|put }
+
