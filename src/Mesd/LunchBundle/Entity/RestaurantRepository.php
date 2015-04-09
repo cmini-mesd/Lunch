@@ -12,16 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class RestaurantRepository extends EntityRepository
 {
-	public function findRestaurant()
+	public function findNoVoteRestaurant()
 	{
-		$count = $this->createQueryBuilder('r')
-			->select('COUNT(r)')
-			->getQuery()
-			->getSingleScalarResult();
-		return $this->createQueryBuilder('r')
+
+		$qb = $this->createQueryBuilder('r');
+		$qb->leftJoin('r.vote', 'v')
+		->groupBy('r')
+		->having($qb->expr()->eq(0, $qb->expr()->count('v.id')))
+		;
+		$qb = $this->createQueryBuilder('r');
+		$qb->andWhere($qb->expr()->orX($qb->expr()->isNull('r.voteTotal'), $qb->expr()->eq(0,'r.voteTotal')))
+		;
+		// var_dump($qb->getQuery()->getDql());
+		// print_r('<br><br>');
+		// var_dump($qb->getQuery()->getSql());
+		// die;
+
+		$count = $this->createQueryBuilder('c')->select($qb->expr()->count('c.id'))->getQuery()->getSingleScalarResult();
+
+		return $qb
 			->setFirstResult(rand(0, $count - 1))
 			->setMaxResults(1)
 			->getQuery()
 			->getSingleResult();
+		
 	}
 }

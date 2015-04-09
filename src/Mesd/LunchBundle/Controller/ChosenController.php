@@ -17,7 +17,7 @@ class ChosenController extends Controller
     public function indexAction(Request $request)
     {	
     	$em = $this->getDoctrine()->getManager();
-    	$restaurant = $em->getRepository('MesdLunchBundle:Restaurant')->findRestaurant();
+    	$restaurant = $em->getRepository('MesdLunchBundle:Restaurant')->findNoVoteRestaurant();
 
 
         return $this->render('MesdLunchBundle:Chosen:index.html.twig', array(
